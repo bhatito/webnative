@@ -16,4 +16,26 @@ class Pesanan
         $rs = $ps->fetchAll();
         return $rs;
     }
+    public function getPesanan($id)
+    {
+        $sql = "SELECT *from pesanan WHERE pesanan.id = ?";
+        $ps = $this->koneksi->prepare($sql);
+        $ps->execute([$id]);
+        $rs = $ps->fetch();
+        return $rs;
+    }
+    public function simpan($data)
+    {
+        $sql = "INSERT INTO pesanan(tanggal, total, pelanggan_id,pembayaran_id)
+    VALUES (?,?,?,?)";
+        $ps = $this->koneksi->prepare($sql);
+        $ps->execute($data);
+    }
+    public function ubah($data)
+    {
+        $sql = "INSERT INTO produk(tanggal, total, pelanggan_id,pembayaran_id)
+    VALUES (?,?,?,?,?,?,?)";
+        $ps = $this->koneksi->prepare($sql);
+        $ps->execute($data);
+    }
 }

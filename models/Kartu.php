@@ -16,12 +16,26 @@ class Kartu
         return $rs;
     }
 
-    function tambah_data_kartu($kode, $nama, $diskon, $iuran)
+    public function getKartu($id)
     {
-        $sql = "insert into kartu values ('','$kode','$nama','$diskon','$iuran')";
+        $sql = "SELECT * from kartu WHERE kartu.id = ?";
         $ps = $this->koneksi->prepare($sql);
-        $ps->execute();
-        $rs = $ps->fetchAll();
+        $ps->execute([$id]);
+        $rs = $ps->fetch();
         return $rs;
+    }
+    public function simpan($data)
+    {
+        $sql = "INSERT INTO kartu(kode, nama, diskon,iuran)
+        VALUES (?,?,?,?)";
+        $ps = $this->koneksi->prepare($sql);
+        $ps->execute($data);
+    }
+    public function ubah($data)
+    {
+        $sql = "INSERT INTO produk(kode, nama, harga_jual,harga_beli, stok, min_stok, jenis_produk_id)
+        VALUES (?,?,?,?,?,?,?)";
+        $ps = $this->koneksi->prepare($sql);
+        $ps->execute($data);
     }
 }

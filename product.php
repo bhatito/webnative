@@ -1,8 +1,11 @@
 <?php
+// include_once 'top.php';
+
+// include_once 'menu.php';
 $model = new Produk();
 $data_produk = $model->dataProduk();
 
-// foreach ($data_produk as $row) {
+// foreach ($data_produk as $row){
 //     print $row['kode'];
 // }
 
@@ -21,9 +24,12 @@ $data_produk = $model->dataProduk();
 </div>
 <div class="card mb-4">
     <div class="card-header">
-        <i class="fas fa-table me-1"></i>
-        DataTable Example
+        <!-- <i class="fas fa-table me-1"></i>
+                                DataTable Example -->
+        <!-- membuat tombol mengarahkan ke file produk_form.php -->
+        <a href="index.php?url=product_form" class="btn btn-primary btn-sm"> Tambah</a>
     </div>
+
     <div class="card-body">
         <table id="datatablesSimple">
             <thead>
@@ -35,7 +41,8 @@ $data_produk = $model->dataProduk();
                     <th>Harga Jual</th>
                     <th>Stok</th>
                     <th>Minimal Stok</th>
-                    <th>Jenis Produk</th>
+                    <th>Jenis Produk </th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tfoot>
@@ -47,24 +54,36 @@ $data_produk = $model->dataProduk();
                     <th>Harga Jual</th>
                     <th>Stok</th>
                     <th>Minimal Stok</th>
-                    <th>Jenis Produk</th>
+                    <th>Jenis Produk </th>
+                    <th>Action</th>
                 </tr>
             </tfoot>
             <tbody>
+                <!-- hapus dari baris 64 sampai 511 -->
+                <!-- dari <tr> ke </tr> -->
                 <?php
                 $no = 1;
                 foreach ($data_produk as $row) {
 
                 ?>
                     <tr>
-                        <th><?= $no ?></th>
-                        <th><?= $row['kode'] ?></th>
-                        <th><?= $row['nama'] ?></th>
-                        <th><?= $row['harga_beli'] ?></th>
-                        <th><?= $row['harga_jual'] ?></th>
-                        <th><?= $row['stok'] ?></th>
-                        <th><?= $row['min_stok'] ?></th>
-                        <th><?= $row['jenis_produk_id'] ?></th>
+                        <td><?= $no ?></td>
+                        <td><?= $row['kode'] ?></td>
+                        <td><?= $row['nama'] ?></td>
+                        <td><?= $row['harga_beli'] ?></td>
+                        <td><?= $row['harga_jual'] ?></td>
+                        <td><?= $row['stok'] ?></td>
+                        <td><?= $row['min_stok'] ?></td>
+                        <td><?= $row['jenis_produk_id'] ?></td>
+                        <td>
+                            <form action="produk_controller.php" method="POST">
+                                <a class="btn btn-info btn-sm" href="index.php?url=product_detail&id=<?= $row['id'] ?>">Detail</a>
+                                <a class="btn btn-warning btn-sm">Ubah</a>
+                                <a class="btn btn-danger btn-sm">Hapus</a>
+
+                                <input type="hidden" name="idx" value="<?= $row['id'] ?>">
+                            </form>
+                        </td>
                     </tr>
                 <?php
                     $no++;

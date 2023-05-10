@@ -22,10 +22,12 @@ $kartu = $model->kartu();
 </div>
 <div class="card mb-4">
     <div class="card-header">
-        <i class="fas fa-table me-1"></i>
-        DataTable Example
+        <!-- <i class="fas fa-table me-1"></i>
+                                DataTable Example -->
+        <!-- membuat tombol mengarahkan ke file produk_form.php -->
+        <a href="index.php?url=kartu_form" class="btn btn-primary btn-sm"> Tambah</a>
     </div>
-    <button type="button" class="btn btn-primary"><a href="tambah_kartu.php" style="color: white;">Tambah Data</a></button>
+
     <div class="card-body">
         <table id="datatablesSimple">
             <thead>
@@ -35,6 +37,7 @@ $kartu = $model->kartu();
                     <th>Nama</th>
                     <th>Diskon</th>
                     <th>Iuran</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tfoot>
@@ -44,6 +47,7 @@ $kartu = $model->kartu();
                     <th>Nama</th>
                     <th>Diskon</th>
                     <th>Iuran</th>
+                    <th>Action</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -53,11 +57,20 @@ $kartu = $model->kartu();
 
                 ?>
                     <tr>
-                        <th><?= $no ?></th>
-                        <th><?= $row['kode'] ?></th>
-                        <th><?= $row['nama'] ?></th>
-                        <th><?= $row['diskon'] ?></th>
-                        <th><?= $row['iuran'] ?></th>
+                        <td><?= $no ?></td>
+                        <td><?= $row['kode'] ?></td>
+                        <td><?= $row['nama'] ?></td>
+                        <td><?= $row['diskon'] ?></td>
+                        <td><?= $row['iuran'] ?></td>
+                        <td>
+                            <form action="kartu_controller.php" method="POST">
+                                <a class="btn btn-info btn-sm" href="index.php?url=kartu_detail&id=<?= $row['id'] ?>">Detail</a>
+                                <a class="btn btn-warning btn-sm">Ubah</a>
+                                <a class="btn btn-danger btn-sm">Hapus</a>
+
+                                <input type="hidden" name="idx" value="<?= $row['id'] ?>">
+                            </form>
+                        </td>
                     </tr>
                 <?php
                     $no++;
