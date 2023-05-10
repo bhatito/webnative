@@ -1,6 +1,6 @@
 <?php
 $model = new Kartu();
-$kartu = $model->kartu();
+$data_kartu = $model->dataKartu();
 
 // foreach ($data_produk as $row) {
 //     print $row['kode'];
@@ -53,7 +53,7 @@ $kartu = $model->kartu();
             <tbody>
                 <?php
                 $no = 1;
-                foreach ($kartu as $row) {
+                foreach ($data_kartu as $row) {
 
                 ?>
                     <tr>
@@ -65,9 +65,8 @@ $kartu = $model->kartu();
                         <td>
                             <form action="kartu_controller.php" method="POST">
                                 <a class="btn btn-info btn-sm" href="index.php?url=kartu_detail&id=<?= $row['id'] ?>">Detail</a>
-                                <a class="btn btn-warning btn-sm">Ubah</a>
-                                <a class="btn btn-danger btn-sm">Hapus</a>
-
+                                <a class="btn btn-warning btn-sm" href="index.php?url=kartu_form&idedit=<?= $row['id'] ?>">Ubah</a>
+                                <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" onclick="return confirm('Anda Yakin Ingin Menghapus ?')">Hapus</button>
                                 <input type="hidden" name="idx" value="<?= $row['id'] ?>">
                             </form>
                         </td>

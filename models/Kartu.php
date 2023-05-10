@@ -7,7 +7,7 @@ class Kartu
         global $dbh;
         $this->koneksi = $dbh;
     }
-    public function kartu()
+    public function dataKartu()
     {
         $sql = "SELECT * FROM kartu";
         $ps = $this->koneksi->prepare($sql);
@@ -33,9 +33,14 @@ class Kartu
     }
     public function ubah($data)
     {
-        $sql = "INSERT INTO produk(kode, nama, harga_jual,harga_beli, stok, min_stok, jenis_produk_id)
-        VALUES (?,?,?,?,?,?,?)";
+        $sql = "UPDATE kartu set kode=?,nama=?,diskon=?,iuran=? WHERE id=?";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute($data);
+    }
+    public function hapus($id)
+    {
+        $sql = "DELETE FROM kartu WHERE id=?";
+        $ps = $this->koneksi->prepare($sql);
+        $ps->execute([$id]);
     }
 }
